@@ -6,16 +6,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.joeljebitto.employeeCRUD.dao.EmployeeDAO;
 import com.joeljebitto.employeeCRUD.entity.Employee;
+import com.joeljebitto.employeeCRUD.service.EmployeeService;
 
 @RestController
 @RequestMapping("/api")
 public class EmployeeRestController {
-  private EmployeeDAO employeeDAO;
 
-  public EmployeeRestController(EmployeeDAO employeeDAO) {
-    this.employeeDAO = employeeDAO;
+  private EmployeeService employeeService;
+
+  public EmployeeRestController(EmployeeService theEmployeeService) {
+    employeeService = theEmployeeService;
   }
 
   @GetMapping("/")
@@ -25,6 +26,6 @@ public class EmployeeRestController {
 
   @GetMapping("/employees")
   public List<Employee> getAllEmployees() {
-    return employeeDAO.getAllEmployees();
+    return employeeService.getAllEmployees();
   }
 }
