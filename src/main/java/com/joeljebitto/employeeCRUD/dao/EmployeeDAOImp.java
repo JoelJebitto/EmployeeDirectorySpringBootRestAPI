@@ -23,12 +23,14 @@ public class EmployeeDAOImp implements EmployeeDAO {
   @Override
   public void saveEmployee(Employee employee) {
     // Implementation for saving an employee
+    entityManager.merge(employee);
   }
 
   @Override
   public Employee getEmployee(int id) {
     // Implementation for retrieving an employee by ID
-    return null; // Placeholder return statement
+    Employee theEmployee = entityManager.find(Employee.class, id);
+    return theEmployee; // Placeholder return statement
   }
 
   @Override
@@ -44,6 +46,9 @@ public class EmployeeDAOImp implements EmployeeDAO {
   @Override
   public void deleteEmployee(int id) {
     // Implementation for deleting an employee by ID
+    Employee theEmployee = entityManager.find(Employee.class, id);
+
+    entityManager.remove(theEmployee);
   }
 
 }
