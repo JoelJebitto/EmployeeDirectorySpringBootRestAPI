@@ -3,6 +3,7 @@ package com.joeljebitto.employeeCRUD.rest;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -81,4 +82,13 @@ public class EmployeeRestController {
     employeeNode.setAll(updatedEmployeeNode);
     return objectMapper.convertValue(employeeNode, Employee.class);
   }
+
+  @DeleteMapping("/employees/{employeesId}")
+  public void deleteEmployee(@PathVariable int employeesId) {
+    if (employeeService.getEmployee(employeesId) == null) {
+      throw new RuntimeException("Employee Id Not Found - " + employeesId);
+    }
+    employeeService.deleteEmployee(employeesId);
+  }
+
 }
